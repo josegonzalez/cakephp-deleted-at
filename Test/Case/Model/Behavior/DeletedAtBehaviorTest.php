@@ -30,4 +30,44 @@ class DeletedAtBehaviorTest extends CakeTestCase {
     $this->assertEqual(2, count($records));
   }
 
+  public function testSoftdelete() {
+    $this->DeletedUser->softdelete(1);
+    $deleted = $this->DeletedUser->find('deleted');
+    $nonDeleted = $this->DeletedUser->find('non_deleted');
+    $this->assertEqual(1, count($deleted));
+    $this->assertEqual(2, count($nonDeleted));
+
+    $this->DeletedUser->softdelete(2);
+    $deleted = $this->DeletedUser->find('deleted');
+    $nonDeleted = $this->DeletedUser->find('non_deleted');
+    $this->assertEqual(2, count($deleted));
+    $this->assertEqual(1, count($nonDeleted));
+
+    $this->DeletedUser->softdelete(3);
+    $deleted = $this->DeletedUser->find('deleted');
+    $nonDeleted = $this->DeletedUser->find('non_deleted');
+    $this->assertEqual(3, count($deleted));
+    $this->assertEqual(0, count($nonDeleted));
+  }
+
+  public function testUnDelete() {
+    $this->DeletedUser->undelete(3);
+    $deleted = $this->DeletedUser->find('deleted');
+    $nonDeleted = $this->DeletedUser->find('non_deleted');
+    $this->assertEqual(1, count($deleted));
+    $this->assertEqual(2, count($nonDeleted));
+
+    $this->DeletedUser->undelete(2);
+    $deleted = $this->DeletedUser->find('deleted');
+    $nonDeleted = $this->DeletedUser->find('non_deleted');
+    $this->assertEqual(1, count($deleted));
+    $this->assertEqual(2, count($nonDeleted));
+
+    $this->DeletedUser->undelete(1);
+    $deleted = $this->DeletedUser->find('deleted');
+    $nonDeleted = $this->DeletedUser->find('non_deleted');
+    $this->assertEqual(0, count($deleted));
+    $this->assertEqual(3, count($nonDeleted));
+  }
+
 }
