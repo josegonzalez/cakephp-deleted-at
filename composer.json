@@ -1,0 +1,27 @@
+{
+  "name": "josegonzalez/cakephp-deleted-at",
+  "version": "0.0.1",
+  "description": "No description",
+  "type": "cakephp-plugin",
+  "keywords": [
+    "cakephp"
+  ],
+  "homepage": "http://github.com/josegonzalez/cakephp-deleted-at",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Jose Diaz-Gonzalez",
+      "role": "Maintainer"
+    },
+  ],
+  "require": {
+    "composer/installers": "*"
+  },
+  "support": {
+    "issues": "https://github.com/josegonzalez/cakephp-deleted-at/issues",
+    "source": "https://github.com/josegonzalez/cakephp-deleted-at"
+  },
+  "extra": {
+    "installer-name": "DeletedAt"
+  }
+}
