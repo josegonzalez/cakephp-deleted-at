@@ -2,7 +2,11 @@
 
 # DeletedAt
 
+Handles soft-deletion of database records
+
 ## Background
+
+Written for the CakeAdvent post on [Build Behaviors](http://josediazgonzalez.com/2013/12/21/building-a-behavior-with-cakephp/)
 
 ## Requirements
 
@@ -58,7 +62,25 @@ If you are already using `CakePlugin::loadAll();`, then this is not necessary.
 
 ## Usage
 
+Add the column `deleted` to your model's table. It should be of type `datetime`, with a default of null.
+
+And add the behavior to your model:
+
+```php
+<?php
+class Post extends AppModel {
+  public $actsAs = array('DeletedAt.DeletedAt');
+}
+?>
+```
+
+Now just `softdelete()` or `undelete()` to see the magic in action!
+
+We' also added the custom finders `deleted` and `non_deleted` for your use.
+
 ## TODO
+
+- More usage
 
 ## License
 
