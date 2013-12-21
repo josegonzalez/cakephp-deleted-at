@@ -1,7 +1,32 @@
 <?php
 App::uses('Model', 'Model');
 App::uses('AppModel', 'Model');
-require_once CAKE . 'Test' . DS . 'CASE' . DS . 'Model' . DS . 'models.php';
+
+class DeletedUser extends CakeTestModel {
+
+/**
+ * name property
+ *
+ * @var string
+ */
+  public $name = 'DeletedUser';
+
+/**
+ * useDbConfig property
+ *
+ * @var array
+ */
+  public $useDbConfig = 'test';
+
+/**
+ * validate property
+ *
+ * @var array
+ */
+  public $validate = array('user' => 'notEmpty', 'password' => 'notEmpty');
+
+}
+
 class DeletedAtBehaviorTest extends CakeTestCase {
 
   public $fixtures = array(
@@ -10,7 +35,7 @@ class DeletedAtBehaviorTest extends CakeTestCase {
 
   public function setUp() {
     parent::setUp();
-    $this->DeletedUser = ClassRegistry::init('User');
+    $this->DeletedUser = ClassRegistry::init('DeletedUser');
     $this->DeletedUser->useTable = 'deleted_users';
     $this->DeletedUser->Behaviors->load('DeletedAt.DeletedAt');
   }
