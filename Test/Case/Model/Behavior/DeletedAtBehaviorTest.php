@@ -21,16 +21,12 @@ class DeletedAtBehaviorTest extends CakeTestCase {
   }
 
   public function testFindDeleted() {
-    $records = $this->DeletedUser->find('all', array(
-      'conditions' => array('deleted <>' => null)
-    ));
+    $records = $this->DeletedUser->find('deleted');
     $this->assertEqual(1, count($records));
   }
 
   public function testFindNonDeleted() {
-    $records = $this->DeletedUser->find('all', array(
-      'conditions' => array('deleted' => null)
-    ));
+    $records = $this->DeletedUser->find('non_deleted');
     $this->assertEqual(2, count($records));
   }
 
