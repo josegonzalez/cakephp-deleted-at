@@ -1,7 +1,7 @@
 {
   "name": "josegonzalez/cakephp-deleted-at",
   "version": "0.0.1",
-  "description": "No description",
+  "description": "Handles soft-deletion of database records",
   "type": "cakephp-plugin",
   "keywords": [
     "cakephp"
@@ -12,7 +12,7 @@
     {
       "name": "Jose Diaz-Gonzalez",
       "role": "Maintainer"
-    },
+    }
   ],
   "require": {
     "composer/installers": "*"
