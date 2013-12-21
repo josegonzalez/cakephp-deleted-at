@@ -20,4 +20,18 @@ class DeletedAtBehaviorTest extends CakeTestCase {
     parent::tearDown();
   }
 
+  public function testFindDeleted() {
+    $records = $this->DeletedUser->find('all', array(
+      'conditions' => array('deleted <>' => null)
+    ));
+    $this->assertEqual(1, count($records));
+  }
+
+  public function testFindNonDeleted() {
+    $records = $this->DeletedUser->find('all', array(
+      'conditions' => array('deleted' => null)
+    ));
+    $this->assertEqual(2, count($records));
+  }
+
 }
