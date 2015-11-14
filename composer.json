@@ -1,6 +1,5 @@
 {
   "name": "josegonzalez/cakephp-deleted-at",
-  "version": "0.0.1",
   "description": "Handles soft-deletion of database records",
   "type": "cakephp-plugin",
   "keywords": [
