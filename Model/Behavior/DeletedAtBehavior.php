@@ -8,30 +8,30 @@ class DeletedAtBehavior extends ModelBehavior {
 	);
 
 	public function setup(Model $model, $config = array()) {
-			$model->findMethods['deleted'] = true;
-			$model->findMethods['non_deleted'] = true;
+		$model->findMethods['deleted'] = true;
+		$model->findMethods['non_deleted'] = true;
 	}
 
 	public function findDeleted(Model $model, $functionCall, $state, $query, $results = array()) {
-			if ($state == 'before') {
-				if (empty($query['conditions'])) {
-					$query['conditions'] = array();
-				}
-				$query['conditions']["{$model->alias}.deleted <>"] = null;
-				return $query;
+		if ($state == 'before') {
+			if (empty($query['conditions'])) {
+				$query['conditions'] = array();
 			}
-			return $results;
+			$query['conditions']["{$model->alias}.deleted <>"] = null;
+			return $query;
+		}
+		return $results;
 	}
 
 	public function findNonDeleted(Model $model, $functionCall, $state, $query, $results = array()) {
-			if ($state == 'before') {
-				if (empty($query['conditions'])) {
-					$query['conditions'] = array();
-				}
-				$query['conditions']["{$model->alias}.deleted"] = null;
-				return $query;
+		if ($state == 'before') {
+			if (empty($query['conditions'])) {
+				$query['conditions'] = array();
 			}
-			return $results;
+			$query['conditions']["{$model->alias}.deleted"] = null;
+			return $query;
+		}
+		return $results;
 	}
 
 	public function softdelete(Model $model, $id = null) {
