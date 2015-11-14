@@ -2,85 +2,131 @@
 App::uses('ModelBehavior', 'Model');
 class DeletedAtBehavior extends ModelBehavior {
 
+/**
+ * mapMethods property
+ *
+ * @var array
+ */
 	public $mapMethods = array(
 		'/findDeleted/' => 'findDeleted',
 		'/findNon_deleted/' => 'findNonDeleted',
 	);
 
-	public function setup(Model $model, $config = array()) {
-		$model->findMethods['deleted'] = true;
-		$model->findMethods['non_deleted'] = true;
+/**
+ * Initiate DeletedAt behavior
+ *
+ * @param Model $Model using this behavior of model
+ * @param array $config array of configuration settings.
+ * @return void
+ */
+	public function setup(Model $Model, $config = array()) {
+		$Model->findMethods['deleted'] = true;
+		$Model->findMethods['non_deleted'] = true;
 	}
 
-	public function findDeleted(Model $model, $functionCall, $state, $query, $results = array()) {
+/**
+ * Finds deleted records
+ *
+ * @param Model $Model using this behavior of model
+ * @param string $functionCall original function being called
+ * @param string $state Either "before" or "after"
+ * @param array $query Query
+ * @param array $results Results
+ * @return mixed array of results or false if none found
+ */
+	public function findDeleted(Model $Model, $functionCall, $state, $query, $results = array()) {
 		if ($state == 'before') {
 			if (empty($query['conditions'])) {
 				$query['conditions'] = array();
 			}
-			$query['conditions']["{$model->alias}.deleted <>"] = null;
+			$query['conditions']["{$Model->alias}.deleted <>"] = null;
 			return $query;
 		}
 		return $results;
 	}
 
-	public function findNonDeleted(Model $model, $functionCall, $state, $query, $results = array()) {
+/**
+ * Finds non-deleted records
+ *
+ * @param Model $Model using this behavior of model
+ * @param string $functionCall original function being called
+ * @param string $state Either "before" or "after"
+ * @param array $query Query
+ * @param array $results Results
+ * @return mixed array of results or false if none found
+ */
+	public function findNonDeleted(Model $Model, $functionCall, $state, $query, $results = array()) {
 		if ($state == 'before') {
 			if (empty($query['conditions'])) {
 				$query['conditions'] = array();
 			}
-			$query['conditions']["{$model->alias}.deleted"] = null;
+			$query['conditions']["{$Model->alias}.deleted"] = null;
 			return $query;
 		}
 		return $results;
 	}
 
-	public function softdelete(Model $model, $id = null) {
+/**
+ * Soft deletes a record
+ *
+ * @param Model $Model using this behavior of model
+ * @param int $id record id
+ * @return bool
+ */
+	public function softdelete(Model $Model, $id = null) {
 		if ($id) {
-			$model->id = $id;
+			$Model->id = $id;
 		}
 
-		if (!$model->id) {
+		if (!$Model->id) {
 			return false;
 		}
 
 		$deleteCol = 'deleted';
-		if (!$model->hasField($deleteCol)) {
+		if (!$Model->hasField($deleteCol)) {
 			return false;
 		}
 
-		$db = $model->getDataSource();
+		$db = $Model->getDataSource();
 		$now = time();
 
 		$default = array('formatter' => 'date');
-		$colType = array_merge($default, $db->columns[$model->getColumnType($deleteCol)]);
+		$colType = array_merge($default, $db->columns[$Model->getColumnType($deleteCol)]);
 
 		$time = $now;
 		if (array_key_exists('format', $colType)) {
 			$time = call_user_func($colType['formatter'], $colType['format']);
 		}
 
-		if (!empty($model->whitelist)) {
-			$model->whitelist[] = $deleteCol;
+		if (!empty($Model->whitelist)) {
+			$Model->whitelist[] = $deleteCol;
 		}
-		$model->set($deleteCol, $time);
-		return $model->saveField($deleteCol, $time);
+		$Model->set($deleteCol, $time);
+		return $Model->saveField($deleteCol, $time);
 	}
 
-	public function undelete(Model $model, $id = null) {
+/**
+ *  Undeletes a record
+ *
+ * @param Model $Model using this behavior of model
+ * @param int $id record id
+ * @return bool
+ */
+	public function undelete(Model $Model, $id = null) {
 		if ($id) {
-			$model->id = $id;
+			$Model->id = $id;
 		}
 
-		if (!$model->id) {
+		if (!$Model->id) {
 			return false;
 		}
 
 		$deleteCol = 'deleted';
-		if (!$model->hasField($deleteCol)) {
+		if (!$Model->hasField($deleteCol)) {
 			return false;
 		}
 
-		$model->set($deleteCol, null);
-		return $model->saveField($deleteCol, null);
+		$Model->set($deleteCol, null);
+		return $Model->saveField($deleteCol, null);
 	}
 }
