@@ -1,4 +1,9 @@
-[![Build Status](https://travis-ci.org/josegonzalez/cakephp-deleted-at.png?branch=master)](https://travis-ci.org/josegonzalez/cakephp-deleted-at) [![Coverage Status](https://coveralls.io/repos/josegonzalez/cakephp-deleted-at/badge.png?branch=master)](https://coveralls.io/r/josegonzalez/cakephp-deleted-at?branch=master) [![Total Downloads](https://poser.pugx.org/josegonzalez/cakephp-deleted-at/d/total.png)](https://packagist.org/packages/josegonzalez/cakephp-deleted-at) [![Latest Stable Version](https://poser.pugx.org/josegonzalez/cakephp-deleted-at/v/stable.png)](https://packagist.org/packages/josegonzalez/cakephp-deleted-at)
+[![Build Status](https://img.shields.io/travis/josegonzalez/cakephp-deleted-at/master.svg?style=flat-square)](https://travis-ci.org/josegonzalez/cakephp-deleted-at) 
+[![Coverage Status](https://img.shields.io/coveralls/josegonzalez/cakephp-deleted-at.svg?style=flat-square)](https://coveralls.io/r/josegonzalez/cakephp-deleted-at?branch=master) 
+[![Total Downloads](https://img.shields.io/packagist/dt/josegonzalez/cakephp-deleted-at.svg?style=flat-square)](https://packagist.org/packages/josegonzalez/cakephp-deleted-at) 
+[![Latest Stable Version](https://img.shields.io/packagist/v/josegonzalez/cakephp-deleted-at.svg?style=flat-square)](https://packagist.org/packages/josegonzalez/cakephp-deleted-at) 
+[![Documentation Status](https://readthedocs.org/projects/cakephp-deleted-at/badge/?version=latest&style=flat-square)](https://readthedocs.org/projects/cakephp-deleted-at/?badge=latest)
+[![Gratipay](https://img.shields.io/gratipay/josegonzalez.svg?style=flat-square)](https://gratipay.com/~josegonzalez/)
 
 # DeletedAt
 
